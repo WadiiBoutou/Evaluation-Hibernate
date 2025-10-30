@@ -6,9 +6,8 @@ import java.util.Date;
 @Entity
 @Table(name = "employe_tache")
 public class EmployeTache {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @EmbeddedId
+    private EmployeTacheId id = new EmployeTacheId();
     
     @Column(name = "date_debut_reelle")
     @Temporal(TemporalType.DATE)
@@ -18,10 +17,12 @@ public class EmployeTache {
     @Temporal(TemporalType.DATE)
     private Date dateFinReelle;
     
+    @MapsId("employeId")
     @ManyToOne
     @JoinColumn(name = "employe_id")
     private Employe employe;
     
+    @MapsId("tacheId")
     @ManyToOne
     @JoinColumn(name = "tache_id")
     private Tache tache;
@@ -33,8 +34,8 @@ public class EmployeTache {
         this.dateFinReelle = dateFinReelle;
     }
     
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public EmployeTacheId getId() { return id; }
+    public void setId(EmployeTacheId id) { this.id = id; }
     
     public Date getDateDebutReelle() { return dateDebutReelle; }
     public void setDateDebutReelle(Date dateDebutReelle) { this.dateDebutReelle = dateDebutReelle; }

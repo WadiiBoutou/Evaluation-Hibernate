@@ -11,6 +11,9 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class EmployeService implements IDao<Employe> {
     private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
     

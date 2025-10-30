@@ -10,6 +10,9 @@ import org.hibernate.SessionFactory;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class LigneCommandeService implements IDao<LigneCommandeProduit> {
     private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
     

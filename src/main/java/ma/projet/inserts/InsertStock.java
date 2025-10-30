@@ -2,6 +2,8 @@ package ma.projet.inserts;
 
 import ma.projet.stock.beans.*;
 import ma.projet.stock.service.*;
+import ma.projet.config.AppConfig;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -10,10 +12,11 @@ import java.text.ParseException;
 public class InsertStock {
     public static void main(String[] args) {
         try {
-            CategorieService categorieService = new CategorieService();
-            ProduitService produitService = new ProduitService();
-            CommandeService commandeService = new CommandeService();
-            LigneCommandeService ligneCommandeService = new LigneCommandeService();
+            AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
+            CategorieService categorieService = ctx.getBean(CategorieService.class);
+            ProduitService produitService = ctx.getBean(ProduitService.class);
+            CommandeService commandeService = ctx.getBean(CommandeService.class);
+            LigneCommandeService ligneCommandeService = ctx.getBean(LigneCommandeService.class);
             
 
             Categorie categorie1 = new Categorie("CAT001", "Ordinateurs");
@@ -57,6 +60,7 @@ public class InsertStock {
             ligneCommandeService.create(ligne3);
             
             System.out.println("Stock data inserted successfully!");
+            ctx.close();
             
         } catch (ParseException e) {
             e.printStackTrace();

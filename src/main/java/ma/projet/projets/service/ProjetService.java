@@ -10,6 +10,9 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class ProjetService implements IDao<Projet> {
     private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
     

@@ -2,6 +2,8 @@ package ma.projet.inserts;
 
 import ma.projet.projets.beans.*;
 import ma.projet.projets.service.*;
+import ma.projet.config.AppConfig;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -9,11 +11,11 @@ import java.text.ParseException;
 
 public class InsertProjet {
     public static void main(String[] args) {
-        try {
-            EmployeService employeService = new EmployeService();
-            ProjetService projetService = new ProjetService();
-            TacheService tacheService = new TacheService();
-            EmployeTacheService employeTacheService = new EmployeTacheService();
+        try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class)) {
+            EmployeService employeService = ctx.getBean(EmployeService.class);
+            ProjetService projetService = ctx.getBean(ProjetService.class);
+            TacheService tacheService = ctx.getBean(TacheService.class);
+            EmployeTacheService employeTacheService = ctx.getBean(EmployeTacheService.class);
             
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             
@@ -72,6 +74,7 @@ public class InsertProjet {
             employeTacheService.create(et3);
             
             System.out.println("Projet data inserted successfully!");
+            ctx.close();
             
         } catch (ParseException e) {
             e.printStackTrace();

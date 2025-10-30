@@ -2,6 +2,8 @@ package ma.projet.inserts;
 
 import ma.projet.civil.beans.*;
 import ma.projet.civil.service.*;
+import ma.projet.config.AppConfig;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -9,10 +11,10 @@ import java.text.ParseException;
 
 public class InsertCivil {
     public static void main(String[] args) {
-        try {
-            HommeService hommeService = new HommeService();
-            FemmeService femmeService = new FemmeService();
-            MariageService mariageService = new MariageService();
+        try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class)) {
+            HommeService hommeService = ctx.getBean(HommeService.class);
+            FemmeService femmeService = ctx.getBean(FemmeService.class);
+            MariageService mariageService = ctx.getBean(MariageService.class);
             
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             

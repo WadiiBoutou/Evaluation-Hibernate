@@ -12,6 +12,9 @@ import org.hibernate.query.Query;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class TacheService implements IDao<Tache> {
     private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
     

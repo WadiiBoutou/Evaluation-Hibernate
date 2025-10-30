@@ -5,17 +5,18 @@ import javax.persistence.*;
 @Entity
 @Table(name = "ligne_commande_produit")
 public class LigneCommandeProduit {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @EmbeddedId
+    private LigneCommandeProduitId id = new LigneCommandeProduitId();
     
     @Column(name = "quantite")
     private int quantite;
     
+    @MapsId("produitId")
     @ManyToOne
     @JoinColumn(name = "produit_id")
     private Produit produit;
     
+    @MapsId("commandeId")
     @ManyToOne
     @JoinColumn(name = "commande_id")
     private Commande commande;
@@ -26,8 +27,8 @@ public class LigneCommandeProduit {
         this.quantite = quantite;
     }
     
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public LigneCommandeProduitId getId() { return id; }
+    public void setId(LigneCommandeProduitId id) { this.id = id; }
     
     public int getQuantite() { return quantite; }
     public void setQuantite(int quantite) { this.quantite = quantite; }

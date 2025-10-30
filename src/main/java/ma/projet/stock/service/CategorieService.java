@@ -10,6 +10,9 @@ import org.hibernate.SessionFactory;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class CategorieService implements IDao<Categorie> {
     private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
     
